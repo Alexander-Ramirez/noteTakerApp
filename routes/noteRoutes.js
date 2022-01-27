@@ -32,7 +32,7 @@ noteRoutes.delete('/:id', (req, res) => {
     readFromFile('./db/db.json').then((data) => JSON.parse(data)).then((json) => {
         const result = json.filter((note) => note.id !== noteID);
         writeTofile("'./db/db.json'", result);
-        res.json(`${noteId} has been deleted`)
+        res.json(`${noteID} has been deleted`)
     })
 })
 
