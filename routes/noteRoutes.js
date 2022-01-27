@@ -1,12 +1,12 @@
-const noteRoutes = require('express').Router();
-const {v4: uuidv4} = require ("uuid");
-const { readFromFile, readAndAppend, writeTofile } = require("../helpers/fsUtils");
+const notes = require('express').Router();
+const {v4: uuidv4} = require ('uuid');
+const {readFromFile, readAndAppend, writeTofile} = require("../helpers/fsUtils");
 
-noteRoutes.get('/', (req, res) => {
+notes.get('/', (req, res) => {
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-noteRoutes.post('/', (req, res) => {
+notes.post('/', (req, res) => {
     const {title, text, id} = req.body;
     if (req.body) {
         const newNote = {
@@ -22,12 +22,12 @@ noteRoutes.post('/', (req, res) => {
     };
 });
 
-noteRoutes.get('/:id', (req, res) => {
+notes.get('/:id', (req, res) => {
     const noteID = req.params.id;
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-noteRoutes.delete('/:id', (req, res) => {
+notes.delete('/:id', (req, res) => {
     const noteID = req.params.id;
     readFromFile('./db/db.json').then((data) => JSON.parse(data)).then((json) => {
         const result = json.filter((note) => note.id !== noteID);
@@ -36,4 +36,4 @@ noteRoutes.delete('/:id', (req, res) => {
     })
 })
 
-module.exports = noteRoutes;
+module.exports = notes;
