@@ -28,11 +28,11 @@ notes.get('/:id', (req, res) => {
 });
 
 notes.delete('/:id', (req, res) => {
-    const noteID = req.params.id;
+    const noteId = req.params.id;
     readFromFile('./db/db.json').then((data) => JSON.parse(data)).then((json) => {
-        const result = json.filter((note) => note.id !== noteID);
+        const result = json.filter((note) => note.id !== noteId);
         writeTofile("'./db/db.json'", result);
-        res.json(`${noteID} has been deleted`)
+        res.json(`${noteId} has been deleted`)
     })
 })
 
